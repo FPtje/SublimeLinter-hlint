@@ -17,7 +17,6 @@ from os.path import basename
 class Hlint(Linter):
     """Provides an interface to hlint."""
 
-    syntax = ('haskell', 'haskell-sublimehaskell', 'literate haskell')
     cmd = 'hlint --cpp-include /home/falco.peijnenburg/engineering/lumi/hs-pkgs/lumi-hackage-extended/include/ --cpp-include /home/falco.peijnenburg/engineering/lumi/hs-pkgs/lumi-document-store-api/include/ --ignore "Redundant do" --ignore "Use camelCase" --ignore "Use ."'
     regex = (
         r'^(?P<filename>.+):(?P<line>\d+):'
@@ -31,6 +30,7 @@ class Hlint(Linter):
         'haskell-sublimehaskell': 'hs',
         'literate haskell': 'lhs'
     }
+    defaults = { "lint_mode": "load_save", 'selector': 'source.haskell' }
 
     def split_match(self, match):
         """Override to ignore errors reported in imported files."""
